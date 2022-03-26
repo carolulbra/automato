@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Autômato</title>
+    </head>
+    <body>
+        <input type="file" name="file" id="file" /> <!--carregar arquivo local do computador-->
+        <script>
+            document.getElementById('file').onchange = function(){ //ler elemento html com ID==file
+                var file = this.files[0]; //declaração variável file que vai receber o arquivo carregado no input
+                var reader = new FileReader(); //declaração variável reader que tem método FileReader para ler arquivo
+                reader.onload = function(progressEvent){   //inicia variavel reader com uma função  
+                    var fileContentArray = this.result.split(/\r\n|\n/); //variavel fileContentArray que é um array onde cada valor é uma linha do arquivo. pega o resultado do arquivo e divide ele quanto achar \n ou quebra de linha
+                    for(var line = 0; line < fileContentArray.length; line++){ //laço for para ler cada linha. começa com a linha 0 até ser menor que o tamanho do array de fileContentArray
+                        document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                        document.write(line+1 +"] "+ fileContentArray[line] + "<br>"); //mostra conteúdo
+                    }
+                    document.write("<br>");
+                    var error = new Array();
+                    for(var line = 0, j = 0; line < fileContentArray.length; line++){ //laço for para ler cada linha. começa com a linha 0 até ser menor que o tamanho do array de fileContentArray
+                        for(var i = 0; i < fileContentArray[line].length; i++){
+                            let string = fileContentArray[line][0];
+                            let pattern = /[/]/;
+                            let result = pattern.test(string);
+                            if(result){
+                                error[j] = line+1 + " (" + fileContentArray[line] + ")";
+                                j++;
+                                break;
+                            }
+                        }
+                    document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                    document.write(line+1 +"] "+ fileContentArray[line][0] + "<br>");
+                    }
+                    document.write("<br>");
+                    if(error){
+                        document.write("Erros nas linhas: <br>")
+                        for(var i = 0; i < error.length; i++){
+                            document.write(error[i] + "<br>");
+                        }
+                    }
+                };
+                reader.readAsText(file); //chamando função de leitura do arquivo com o arquivo que foi enviado no input
+            };
+        </script>
+    </body>
+</html>
