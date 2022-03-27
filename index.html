@@ -28,7 +28,7 @@
                             document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                             document.write(line+1 +"] "+ word.toUpperCase() + "<br>");
                         }else if(!result){
-                            pattern = /^[a-zA-Z]+|^[a-zA-Z][0-9]+/;
+                            pattern = /^[a-zA-Z]+$|^[a-zA-Z]+[0-9]+$/;
                             result = pattern.test(word);
                             if(result){
                                 let l = id.length;
