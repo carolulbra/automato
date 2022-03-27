@@ -17,52 +17,88 @@
                         document.write(line+1 +"] "+ fileContentArray[line] + "<br>"); //mostra conteúdo
                     }
                     document.write("<br>");
-                    var error = new Array();
+                    var error = new Array(); //erros
+                    var id = new Array(); //identificadores
+                    let i = 0;
                     for(var line = 0, j = 0; line < fileContentArray.length; line++){ //laço for para ler cada linha. começa com a linha 0 até ser menor que o tamanho do array de fileContentArray
-                        let word1 = fileContentArray[line][0];
-                        let pattern = /[a-z]|[A-Z]|[0-9]/;
-                        let result = pattern.test(word1);
-                        if(!result){//identificadores não começam com letra ou número
-                            let word1 = fileContentArray[line][0];
-                            let word2 = fileContentArray[line][1];
-                            let pattern = /[/]/;
-                            let result1 = pattern.test(word1);
-                            let result2 = pattern.test(word2);
-                            console.log(fileContentArray[line][0] + " " + result1 + " " + fileContentArray[line][1] + " " + result2);
-                            if((!result1&&!result2)||result1!=result2){
-                                error[j] = line+1 + " (" + fileContentArray[line] + ")";
-                                j++;
-                            }
-                        }else{//identificadores começam com número
-                            let word = fileContentArray[line];
-                            let pattern = /[0.0-99.99]/;
-                            let result = pattern.test(word);
+                        let word = fileContentArray[line];
+                        let pattern = /^int$|^double$|^float$|^real$|^break$|^case$|^char$|^const$|^continue$/;
+                        let result = pattern.test(word);
+                        if(result){
+                            document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                            document.write(line+1 +"] "+ word.toUpperCase() + "<br>");
+                        }else if(!result){
+                            pattern = /^[a-zA-Z]+|^[a-zA-Z][0-9]+/;
+                            result = pattern.test(word);
                             if(result){
-                                pattern = /[.]$/;//se for float incompleto
-                                let result = pattern.test(word);
-                                if(result || parseFloat(word) > 99.99){
-                                    error[j] = line+1 + " (" + fileContentArray[line] + ")";
-                                    j++;
+                                let l = id.length;
+                                if(l == 0){
+                                    id[0] = fileContentArray[line];
+                                }else{
+                                    for(i = 0; i <= l; i++){
+                                        if(fileContentArray[line] == id[i]){
+                                            break;
+                                        }else if(i == l){
+                                            id[i] = fileContentArray[line];
+                                            break;
+                                        }
+                                    }
+                                }
+                                i++;
+                                document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                                document.write(line+1 +"] IDENTIFICADOR "+ i + "<br>");
+                            }else{
+                                pattern = /^[0-9]{1,2}[.][0-9]{1,2}$/;
+                                result = pattern.test(word);
+                                if(result){
+                                    let l = id.length;
+                                    if(l == 0){
+                                        id[0] = fileContentArray[line];
+                                    }else{
+                                        for(i = 0; i <= l; i++){
+                                            if(fileContentArray[line] == id[i]){
+                                                break;
+                                            }else if(i == l){
+                                                id[i] = fileContentArray[line];
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    i++;
+                                    document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                                    document.write(line+1 +"] NÚMERO REAL " + i + "<br>");                                
+                                }else{
+                                    pattern = /^[0-9]{1,2}$/;
+                                    result = pattern.test(word);
+                                    if(result){
+                                        let l = id.length;
+                                        if(l == 0){
+                                            id[0] = fileContentArray[line];
+                                        }else{
+                                            for(i = 0; i <= l; i++){
+                                                if(fileContentArray[line] == id[i]){
+                                                    break;
+                                                }else if(i == l){
+                                                    id[i] = fileContentArray[line];
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        i++;
+                                        document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                                        document.write(line+1 +"] NÚMERO INTEIRO " + i + "<br>");
+                                    }
                                 }
                             }
+                        }else{
+                            error[j] = line+1 + " (" + fileContentArray[line] + ")";
+                            j++;
                         }
-                            /*for(var i = 1; i < fileContentArray[line].length; i++){
-                                let word = fileContentArray[line][i];
-                                pattern = //;
-                                result = pattern.test(word);
-                                if(x){
-                                    error[j] = line+1 + " (" + fileContentArray[line] + ")";
-                                    j++;
-                                }
-                            }  
-                        }*/
-                        document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
-                        document.write(line+1 +"] "+ fileContentArray[line][0] + "<br>");
                     }
                     document.write("<br>");
                     if(error){
                         document.write("Erros nas linhas: <br>")
-                        for(var i = 0; i < error.length; i++){
+                        for(i = 0; i < error.length; i++){
                             document.write(error[i] + "<br>");
                         }
                     }
