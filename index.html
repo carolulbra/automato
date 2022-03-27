@@ -48,7 +48,7 @@
                                 document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                                 document.write(line+1 +"] IDENTIFICADOR "+ i + "<br>");
                             }else{
-                                pattern = /^[0-9]{1,2}[.][0-9]{1,2}$/;
+                                pattern = /^[0-9]{1,2}[.][0-9]{1,2}$|^[0-9]{1,2}[.][0-9]{1,2}[/]{2}|^[0-9]{1,2}[.][0-9]{1,2}\s[/]{2}/;
                                 result = pattern.test(word);
                                 if(result){
                                     let l = id.length;
@@ -68,7 +68,7 @@
                                     document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                                     document.write(line+1 +"] NÚMERO REAL " + i + "<br>");                                
                                 }else{
-                                    pattern = /^[0-9]{1,2}$/;
+                                    pattern = /^[0-9]{1,2}$|^[0-9]{1,2}\s[/]{2}|^[0-9]{1,2}[/]{2}/;
                                     result = pattern.test(word);
                                     if(result){
                                         let l = id.length;
@@ -87,6 +87,13 @@
                                         i++;
                                         document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                                         document.write(line+1 +"] NÚMERO INTEIRO " + i + "<br>");
+                                    }else{
+                                        pattern = /[/]{2}/;
+                                        result = pattern.test(word);
+                                        if(result){
+                                            document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
+                                            document.write(line+1 +"] COMENTÁRIO <br>");
+                                        }
                                     }
                                 }
                             }

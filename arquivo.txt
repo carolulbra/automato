@@ -3,7 +3,7 @@ a
 int
 asd
 as123
-99
+99.99 //
 99.
 99.99
 float
@@ -17,3 +17,8 @@ asd
 -- Teste
 Joao da Silva --
 char
+99 99
+teste // 
+99//
+99/
+99 //adsa
