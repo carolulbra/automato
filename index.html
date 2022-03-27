@@ -22,23 +22,23 @@
                         let word1 = fileContentArray[line][0];
                         let pattern = /[a-z]|[A-Z]|[0-9]/;
                         let result = pattern.test(word1);
-                        if(!result){
+                        if(!result){//identificadores não começam com letra ou número
                             let word1 = fileContentArray[line][0];
                             let word2 = fileContentArray[line][1];
                             let pattern = /[/]/;
                             let result1 = pattern.test(word1);
                             let result2 = pattern.test(word2);
-                            console.log(result1 + " " + result2);
-                            if(!result1&&!result2){
+                            console.log(fileContentArray[line][0] + " " + result1 + " " + fileContentArray[line][1] + " " + result2);
+                            if((!result1&&!result2)||result1!=result2){
                                 error[j] = line+1 + " (" + fileContentArray[line] + ")";
                                 j++;
                             }
-                        }else{
+                        }else{//identificadores começam com número
                             let word = fileContentArray[line];
                             let pattern = /[0.0-99.99]/;
                             let result = pattern.test(word);
                             if(result){
-                                pattern = /[.]$/;
+                                pattern = /[.]$/;//se for float incompleto
                                 let result = pattern.test(word);
                                 if(result || parseFloat(word) > 99.99){
                                     error[j] = line+1 + " (" + fileContentArray[line] + ")";
