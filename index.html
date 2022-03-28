@@ -3,9 +3,27 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Autômato</title>
+        <style>
+            .button {
+                background-color: #6db9e6;
+                border: none;
+                color: rgb(0, 0, 0);
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -110px;
+                margin-top: -40px;
+            }
+        </style>
     </head>
-    <body>
-        <input type="file" name="file" id="file" /> <!--carregar arquivo local do computador-->
+    <body style="background-color: #0e0b33;">
+        <input type="file" name="file" id="file" class="button"/> <!--carregar arquivo local do computador-->
         <script>
             document.getElementById('file').onchange = function(){ //ler elemento html com ID==file
                 var file = this.files[0]; //declaração variável file que vai receber o arquivo carregado no input
@@ -96,8 +114,12 @@
                                             document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                                             document.write(line+1 +"] COMENTÁRIO <br>");
                                         }else{
-                                            error[j] = line+1 + " (" + fileContentArray[line] + ")";
-                                            j++;
+                                            if(fileContentArray[line] === "")
+                                                continue;
+                                            else{
+                                                error[j] = line+1 + " (" + fileContentArray[line] + ")";
+                                                j++;
+                                            }
                                         }
                                     }
                                 }
