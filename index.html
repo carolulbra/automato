@@ -12,14 +12,14 @@
                 var reader = new FileReader(); //declaração variável reader que tem método FileReader para ler arquivo
                 reader.onload = function(progressEvent){   //inicia variavel reader com uma função  
                     var fileContentArray = this.result.split(/\r\n|\n/); //variavel fileContentArray que é um array onde cada valor é uma linha do arquivo. pega o resultado do arquivo e divide ele quanto achar \n ou quebra de linha
+                    var error = new Array(); //erros
+                    var id = new Array(); //identificadores
+                    let i = 0;
                     for(var line = 0; line < fileContentArray.length; line++){ //laço for para ler cada linha. começa com a linha 0 até ser menor que o tamanho do array de fileContentArray
                         document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                         document.write(line+1 +"] "+ fileContentArray[line] + "<br>"); //mostra conteúdo
                     }
                     document.write("<br>");
-                    var error = new Array(); //erros
-                    var id = new Array(); //identificadores
-                    let i = 0;
                     for(var line = 0, j = 0; line < fileContentArray.length; line++){ //laço for para ler cada linha. começa com a linha 0 até ser menor que o tamanho do array de fileContentArray
                         let word = fileContentArray[line];
                         let pattern = /^int$|^double$|^float$|^real$|^break$|^case$|^char$|^const$|^continue$/;
@@ -103,8 +103,13 @@
                         }
                     }
                     document.write("<br>");
+                    let l = id.length;
+                    document.write("Tabela de Símbolos <br>");
+                    for(i = 0, j = 1; i < l; i++, j++)
+                        document.write(j + "- " + id[i] + "<br>");
+                    document.write("<br>");
                     if(error){
-                        document.write("Erros nas linhas: <br>")
+                        document.write("Erros nas linhas: <br>");
                         for(i = 0; i < error.length; i++){
                             document.write(error[i] + "<br>");
                         }

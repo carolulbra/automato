@@ -3,13 +3,13 @@ a
 int
 asd
 as123
-99.99 //
+99
 99.
 99.99
 float
 real a
 real
-dou121ble dd121213132dsd
+double _c
 double
  as_asd
 asd
@@ -17,8 +17,3 @@ asd
 -- Teste
 Joao da Silva --
 char
-99 99
-teste // 
-99//
-99/
-99 //adsa
