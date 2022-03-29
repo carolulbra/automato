@@ -59,6 +59,7 @@
                                         if(fileContentArray[line] == id[i]){
                                             break;
                                         }else if(i == l){
+                                            fileContentArray[line] = fileContentArray[line].replace(/[/]/g, "");
                                             id[i] = fileContentArray[line];
                                             break;
                                         }
@@ -79,6 +80,7 @@
                                             if(fileContentArray[line] == id[i]){
                                                 break;
                                             }else if(i == l){
+                                                fileContentArray[line] = fileContentArray[line].replace(/[/]/g, "");
                                                 id[i] = fileContentArray[line];
                                                 break;
                                             }
@@ -99,6 +101,7 @@
                                                 if(fileContentArray[line] == id[i]){
                                                     break;
                                                 }else if(i == l){
+                                                    fileContentArray[line] = fileContentArray[line].replace(/[/]/g, "");
                                                     id[i] = fileContentArray[line];
                                                     break;
                                                 }
@@ -114,12 +117,8 @@
                                             document.write("["); //por algum motivo precisa ser separado do resto. há coisas na vida de programador que só aceitamos
                                             document.write(line+1 +"] COMENTÁRIO <br>");
                                         }else{
-                                            if(fileContentArray[line] === "")
-                                                continue;
-                                            else{
-                                                error[j] = line+1 + " (" + fileContentArray[line] + ")";
-                                                j++;
-                                            }
+                                            error[j] = line+1 + " (" + fileContentArray[line] + ")";
+                                            j++;
                                         }
                                     }
                                 }
